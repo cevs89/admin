@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url, include
 from django.urls import path
-from users.views import (RegisterUser, GetProfile)
+from users.views import (RegisterUser, GetProfile, Updateprofile)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/register/', RegisterUser),
     path('api/user/profile/', GetProfile),
+    path('api/user/update/profile/', Updateprofile),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^authentication/', include('rest_auth.urls'))
 

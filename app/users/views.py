@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from users.models import UserProfile
-from users.serializers import ValidateUsersRegister
+from users.serializers import ValidateUsersRegister, ValidateUsersUpdate
 from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
@@ -64,3 +64,33 @@ def GetProfile(request):
         'country': profile.country, 'address': profile.address,
         'city': profile.city
         })
+
+
+@api_view(['POST'])
+@parser_classes((JSONParser,))
+@permission_classes((permissions.IsAuthenticated,))
+def Updateprofile(request):
+    data = json.loads(request.body.decode("utf-8"))
+    validate_update = ValidateUsersUpdate(data=data)
+    if validate_update.is_valid():
+        valid_data = validate_update.validated_data
+        id_user = valid_data['id_user']
+        academic_level = valid_data['academic_level']
+        address = valid_data['address']
+        city = valid_data['city']
+        country = valid_data['country']
+
+        try:
+            profileUpdte = UserProfile.objects.get(user_id=id_user)
+        except UserProfile.DoesNotExist:
+            return JsonResponse({'token': 'User not exist'})
+
+        profileUpdte.academic_level = academic_level
+        profileUpdte.address = address
+        profileUpdte.city = city
+        profileUpdte.country = country
+        profileUpdte.save()
+
+        return JsonResponse({'success': True, 'msg': 'User has been modified'})
+    else:
+        return JsonResponse(validate_update.errors)

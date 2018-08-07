@@ -63,7 +63,7 @@ Authorization: token YOUR_TOKEN
 }
 ```
 =========================================================
-### User Profile:
+### Get User Profile:
 */api/user/profile/*
 
 **Header:**
@@ -87,4 +87,26 @@ body:
   "city": "Caracas",
   "academic_level": "Universitario
 }
+```
+==========================================================
+
+### Update Profile:
+*/api/user/update/profile/*
+
+**Header:**
+Authorization: token YOUR_TOKEN
+
+body:
+```
+{
+"id_user":"2",
+"academic_level":"primaria",
+"address":"calle 1",
+"city":"maracay",
+"country":"Venezuela"
+}
+```
+**Response success:**
+```
+{'success': True, 'msg': 'User has been modified'}
 ```

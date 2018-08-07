@@ -25,3 +25,11 @@ class ValidateUsersRegister(serializers.Serializer):
     address = serializers.CharField(required=True, max_length=150)
     city = serializers.CharField(required=True, max_length=30)
     country = serializers.CharField(required=True, max_length=30)
+
+
+class ValidateUsersUpdate(serializers.Serializer):
+    id_user = serializers.IntegerField(required=True)
+    academic_level = serializers.CharField(required=True, max_length=30)
+    address = serializers.CharField(required=True, max_length=150)
+    city = serializers.CharField(required=True, max_length=30)
+    country = serializers.CharField(required=True, max_length=30)
