@@ -44,7 +44,7 @@
 ```
 
 **Send Header in all request:**
-Authorization: token YOUR_TOKEN
+Authorization: token TOKEN_SESSION
 
 ========================================================
 ### Logout:
@@ -53,7 +53,7 @@ Authorization: token YOUR_TOKEN
 **request:**
 
 **Send Header:**
-Authorization: token YOUR_TOKEN
+Authorization: token TOKEN_SESSION
 
 
 **Response:**
@@ -67,7 +67,7 @@ Authorization: token YOUR_TOKEN
 */api/user/profile/*
 
 **Header:**
-Authorization: token YOUR_TOKEN
+Authorization: token TOKEN_SESSION
 
 
 **Request:**
@@ -94,7 +94,7 @@ body:
 */api/user/update/profile/*
 
 **Header:**
-Authorization: token YOUR_TOKEN
+Authorization: token TOKEN_SESSION
 
 body:
 ```
@@ -109,4 +109,27 @@ body:
 **Response success:**
 ```
 {'success': True, 'msg': 'User has been modified'}
+```
+============================================================
+
+### Change password
+*/authentication/password/change/*
+
+**Header:**
+Authorization: token TOKEN_SESSION
+
+
+**Request:**
+
+body:
+```
+{
+  "new_password1":"New Pass",
+  "new_password2":"Repeat New Pass",
+  "old_password":"Old Pass"
+}
+```
+**Response success:**
+```
+{"detail":"New password has been saved."}
 ```
